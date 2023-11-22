@@ -4,7 +4,8 @@
 
 
     <br/>
-<a href="https://learn.microsoft.com/ja-jp/previous-versions/iis/iis-5.0/cc338735(v=msdn.10)">ユーザーからの入力を処理する(構造体)</a><br/>
+<a href="https://learn.microsoft.com/ja-jp/previous-versions/iis/iis-5.0/cc338735(v=msdn.10)">
+ユーザーからの入力を処理する(構造体)</a><br/>
 <br/>
 
   ASP の Request オブジェクトを使用すると、HTML フォームから取得したデータの収集および<br/>

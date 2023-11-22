@@ -8,7 +8,25 @@
 データ ソースにアクセスする</a><br/>
 <br/>
 
-<h2>※実際のDBへのコネクトは失敗している。別ファイルでASPファイルからの接続を試みる</h2>
+<h2>自分の環境の接続文字列: Provider=SQLOLEDB;Data Source=(Local);Initial Catalog=TutorialDB;Integrated Security=SSPI;</h2><br>
+※※文字列はChatGPTで自動生成。接続に必要な要件を要確認※※<br>
+Windows認証を使用。(SQL Server認証よりアカウント管理が楽で、拡張性が高いらしい)<br>
+<br>
+
+
+Data Source: データベースの場所を指定します。ここでは (Local) を使用していますが、<br>
+適切なSQL Serverのインスタンス名やIPアドレスに変更してください。<br>
+<br>
+
+Initial Catalog: データベースの名前を指定します。TutorialDB は、<br>
+接続しようとしているデータベースの名前と一致している必要があります。<br>
+<br>
+
+Integrated Security=SSPI;: Windows認証を使用して接続する場合に指定します。<br>
+この場合、ユーザー名とパスワードは不要です。Windowsのログインユーザーが適切な権限を<br>
+持っている必要があります。<br>
+<br>
+
 
 ActiveX Data Objects (ADO) は、Web ページにデータベース アクセス機能を追加するための、<br>
 使いやすく拡張性の高いテクノロジです。<br>
@@ -44,14 +62,15 @@ SQL Server セキュリティ<br>
 
   <%
   'Define the OLE DB connection string.
-  strConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\TutorialDB.mdf"
+  strConnectionString = "Provider=SQLOLEDB;Data Source=(Local);Initial Catalog=TutorialDB;Integrated Security=SSPI;"
+  '"Provider=SQLOLEDB;Data Source=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\TutorialDB.mdf"
 
   'Instantiate the Connection object and open a database connection.
   Set cnn = Server.CreateObject("ADODB.Connection")
   cnn.Open strConnectionString
 
   'Define SQL SELECT statement.
-  strSQL = "INSERT INTO dbo.Customers (Name, Location) VALUES ('Take','Japan')"
+  strSQL = "INSERT INTO dbo.Customers (CustomerID, Name, Location, Email) VALUES ('6', 'Take','Japan', 'taketake@jackson.jp')"
 
   '追加
   cnn.Execute strSQL,,adCmdText + adExecuteNoRecords
@@ -60,7 +79,7 @@ SQL Server セキュリティ<br>
   cnn.Execute "UPDATE dbo.Customers SET Name = 'YOYO' WHERE Location = 'Japan' ",,adCmdText + adExecuteNoRecords
 
   '削除
-  cnn.Execute "DELETE FROM dbo.Customers WHERE Location = 'Japan'",,adCmdText + adExecuteNoRecords
+  'cnn.Execute "DELETE FROM dbo.Customers WHERE Location = 'Japan'",,adCmdText + adExecuteNoRecords
 
 
 %>
@@ -88,7 +107,7 @@ SELECT コマンドは、クエリの制約条件に基づいて特定の情報�
 
 <%
   'DBと接続
-  strConnectionString  = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\TutorialDB.mdf"
+  strConnectionString = "Provider=SQLOLEDB;Data Source=(Local);Initial Catalog=TutorialDB;Integrated Security=SSPI;"
   Set cnn = Server.CreateObject("ADODB.Connection")
   cnn.Open strConnectionString
 
@@ -114,7 +133,7 @@ SELECT コマンドは、クエリの制約条件に基づいて特定の情報�
 <br>
 
 <%
-  strConnectionString  = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\TutorialDB.mdf"
+  strConnectionString = "Provider=SQLOLEDB;Data Source=(Local);Initial Catalog=TutorialDB;Integrated Security=SSPI;"
   strSQL = "SELECT FirstName, LastName FROM Customers WHERE LastName = 'Smith' "
   Set rstCustomers = Server.CreateObject("ADODB.Recordset")
 
@@ -138,7 +157,7 @@ Recordset オブジェクトの Open メソッドを使用して接続を確立�
 リンクを確保するために Connection オブジェクトを暗黙的に使用しています。<br>
 <br>
 
-&lt;% 'サンプル　レコードセット内の正確なレコード数をカウント<br>
+&lt;% 'サンプル レコードセット内の正確なレコード数をカウント<br>
 	Set rs = Server.CreateObject("ADODB.Recordset")<br>
 	rs.Open "SELECT * FROM NewOrders", "Provider=Microsoft.Jet.OLEDB.3.51;Data Source='C:\CustomerOrders\Orders.mdb'", adOpenKeyset, adLockOptimistic, adCmdText<br>
 	<br>

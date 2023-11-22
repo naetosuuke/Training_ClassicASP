@@ -5,7 +5,8 @@
 <h3>・・・・・・・・・・・コレクションを格納するオブジェクトの種類を覚える・・・・・・・・・・・</h3><br/>
 
     <br/>
-<a href="https://learn.microsoft.com/ja-jp/previous-versions/iis/iis-5.0/cc338731(v=msdn.10)"></a>コレクションを使用する(構造体)<br/>
+<a href="https://learn.microsoft.com/ja-jp/previous-versions/iis/iis-5.0/cc338731(v=msdn.10)">
+コレクションを使用する(構造体)</a><br/>
 <br/>
 
   <br/>
@@ -34,7 +35,7 @@ ASP の組み込みオブジェクトの多くは、コレクションを提供�
 <%= Session.Contents("FirstName") %> = "Meng"<br/>
 <br/>
 インデックス番号でも値が出る<br/>
-※※コレクションの院デック番号は、0からでなく1から開始する。気を付ける！<br/>
+※※コレクションの院デック番号は、0からでなく1から開始する。気を付ける!<br/>
 <%= Session.Contents(2) %> = "Phua"<br/>
 <br/>
 オブジェクトにコレクションが1つしかなければ、オブジェクト名だけで呼出可能<br/>
